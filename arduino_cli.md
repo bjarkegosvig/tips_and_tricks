@@ -1,10 +1,5 @@
-arduino-cli
+# arduino-cli
 
-Tuesday, February 8, 2022
-
-11:15 AM
-
- 
 
 Some example on how to use the arduino cli and create a config.yaml file
 
@@ -14,38 +9,30 @@ Some example on how to use the arduino cli and create a config.yaml file
 
 Some commands to use without the config file
 
-**Install model01 package**
+## Install model01 package
+```ps1
+arduino-cli core update-index --additional-urls "<https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>"
 
-arduino-cli core update-index --additional-urls
-"<https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>"
+.\arduino-cli.exe core install arduino:avr keyboardio:avr --additional-urls <https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>
+```
 
+## Compile the Model01 sketch
  
-
-.\\arduino-cli.exe core install arduino:avr keyboardio:avr
---additional-urls
-<https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>
-
+```ps1
+.\arduino-cli.exe compile -b keyboardio:avr:model01 C:\git\private_repos\Model01-Firmware
+```
  
+## Flash the Model01 sketch
 
-**Compile the Model01 sketch**
-
-.\arduino-cli.exe compile -b keyboardio:avr:model01
-C:\git\private_repos\Model01-Firmware
-
+```ps1
+.\arduino-cli.exe upload COM4 -b keyboardio:avr:model01 C:\git\private_repos\Model01-Firmware
+```
  
+## Compile and flash Flash the Model01 sketch
 
-**Flash the Model01 sketch**
-
-.\arduino-cli.exe upload COM4 -b keyboardio:avr:model01
-C:\git\private_repos\Model01-Firmware
-
- 
-
-**Compile and flash Flash the Model01 sketch**
-
-.\arduino-cli.exe compile –u –p COM4 -b keyboardio:avr:model01
-C:\git\private_repos\Model01-Firmware
-
+```ps1
+.\arduino-cli.exe compile –u –p COM4 -b keyboardio:avr:model01 C:\git\private_repos\Model01-Firmware
+```
  
 
  
