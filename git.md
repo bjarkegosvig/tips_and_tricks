@@ -4,6 +4,8 @@
 [Find commits to cherry-pick a feature](#find-commits-to-cherry-pick-a-feature)  
 [Check which line ending a file is committed with](#Check-which-line-ending-a-file-is-committed-with)  
 [Get of of stuck branch due to line endings](#Get-of-of-stuck-branch-due-to-line-endings)
+[Useful alias'](#useful_alias)  
+[Useful git-bash commands](#Useful_git_bash_commands)
 
 # Apply part of a stash
 
@@ -75,4 +77,61 @@ git show HEAD:./file_name | file -
 ```bash
 git branch -f <origin/branch-name> <commit-sha>
 git checkout <branch-name>
+```
+
+
+# Useful alias
+## More useful git logs
+```lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'```  
+
+```lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all```  
+
+**alias lg to lg1**  
+```lg = !"git lg1"```  
+
+## Checkout branch using fzf to search. 
+**Only works on local branches**  
+```cof = "!checkout_fzf() { git for-each-ref refs/heads/ --format='%(refname:short)' | fzf | xargs git checkout; }; checkout_fzf"```  
+
+
+# Useful git-bash commands
+In your .bashrc file (usually found in the user dir) put the following functions
+The following code is from https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
+```
+# List all branches, sort by latest commit and search with fzf
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+# checkout a branch using fzf-git-branch to select the branch 
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+# setup alias'
+alias gb='fzf-git-branch'
+alias gco='fzf-git-checkout'
 ```
