@@ -135,3 +135,14 @@ fzf-git-checkout() {
 alias gb='fzf-git-branch'
 alias gco='fzf-git-checkout'
 ```
+
+
+## Only clone one specific sha
+Useful when a shallow clone is not enough, especially on a build server when cloning takes a long time.
+Uses the fact that a git config can be passed on the fly to git clone command
+```
+git clone --quiet --config remote.origin.fetch=+${env.GIT_COMMIT_SHA_RESOLVED}:refs/remotes/origin/${env.GIT_COMMIT_SHA_RESOLVED} --config advice.detachedHead=false https://GITREPO.git --no-checkout --depth 1
+            pushd ${env.repoName}
+              git checkout ${env.GIT_COMMIT_SHA_RESOLVED}
+            popd
+```
