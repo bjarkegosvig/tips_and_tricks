@@ -5,8 +5,8 @@
 [Check which line ending a file is committed with](#Check-which-line-ending-a-file-is-committed-with)  
 [Get of of stuck branch due to line endings](#Get-of-of-stuck-branch-due-to-line-endings)
 [Useful alias'](#useful_alias)  
-[Useful git-bash commands](#Useful_git_bash_commands)
-
+[Useful git-bash commands](#Useful_git_bash_commands)  
+[Only clone one specific sha](#Only-clone-one-specific-sha)
 # Apply part of a stash
 
 You've made a stash and wish to checkout only some of the files/folder in that
@@ -142,7 +142,7 @@ Useful when a shallow clone is not enough, especially on a build server when clo
 Uses the fact that a git config can be passed on the fly to git clone command
 ```
 git clone --quiet --config remote.origin.fetch=+${env.GIT_COMMIT_SHA_RESOLVED}:refs/remotes/origin/${env.GIT_COMMIT_SHA_RESOLVED} --config advice.detachedHead=false https://GITREPO.git --no-checkout --depth 1
-            pushd ${env.repoName}
-              git checkout ${env.GIT_COMMIT_SHA_RESOLVED}
-            popd
+pushd ${env.repoName}
+git checkout ${env.GIT_COMMIT_SHA_RESOLVED}
+popd
 ```
