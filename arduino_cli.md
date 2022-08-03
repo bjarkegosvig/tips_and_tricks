@@ -11,9 +11,11 @@ Some commands to use without the config file
 
 ## Install model01 package
 ```ps1
-arduino-cli core update-index --additional-urls "<https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>"
-
-arduino-cli.exe core install arduino:avr keyboardio:avr --additional-urls <https://raw.githubusercontent.com/keyboardio/boardsmanager/master/package_keyboardio_index.json>
+arduino-cli config init
+arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/keyboardio/arduino-kaleidoscope-master/main/package_kaleidoscope_master_index.json
+arduino-cli core update-index
+# This line might needs to be run in a admin powershell
+arduino-cli.exe core install arduino:avr keyboardio:avr
 ```
 
 ## Compile the Model01 sketch
