@@ -3,10 +3,12 @@
 [Stash single file or folder](#stash-single-file-or-folder)  
 [Find commits to cherry-pick a feature](#find-commits-to-cherry-pick-a-feature)  
 [Check which line ending a file is committed with](#Check-which-line-ending-a-file-is-committed-with)  
-[Get of of stuck branch due to line endings](#Get-of-of-stuck-branch-due-to-line-endings)
+[Get of of stuck branch due to line endings](#Get-of-of-stuck-branch-due-to-line-endings)  
+[Change the date on a commit](#Change-the-date-on-a-commit)  
 [Useful alias'](#useful_alias)  
 [Useful git-bash commands](#Useful_git_bash_commands)  
 [Only clone one specific sha](#Only-clone-one-specific-sha)
+
 # Apply part of a stash
 
 You've made a stash and wish to checkout only some of the files/folder in that
@@ -18,7 +20,7 @@ git checkout stash@{0} -- some_dir/myfile.txt
 for a folder
 
 ```bash
-git checkout stash@{0} -- algo/
+git checkout stash@{0} -- my_folder/
 ```
  
 Source <https://riptutorial.com/git/example/7733/apply-part-of-a-stash-with-checkout>
@@ -78,7 +80,24 @@ git show HEAD:./file_name | file -
 git branch -f <origin/branch-name> <commit-sha>
 git checkout <branch-name>
 ```
+# Change the date on a commit
+## Update the last commit to current date
 
+```bash
+GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
+```
+## Update the last commit to any date date
+
+```bash
+GIT_COMMITTER_DATE="Mon Sep 5 12:00 2022 +0000" git commit --amend --no-edit
+```
+
+
+## Update any commit to any date date
+1) ```git rebase <commit-hash>^ -i```
+2) select e or edit in the dialog
+3) save and quit the dialog
+4) ```GIT_COMMITTER_DATE="Mon Sep 5 12:00 2022 +0000" git commit --amend --no-edit```
 
 # Useful alias
 ## More useful git logs
