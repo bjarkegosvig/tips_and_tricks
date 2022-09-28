@@ -33,7 +33,7 @@ arduino-cli.exe upload -p COM4 -b keyboardio:avr:model01 C:\git\private_repos\Mo
 ## Compile and flash Flash the Model01 sketch
 
 ```ps1
-arduino-cli.exe compile –u -b keyboardio:avr:model01 –p COM4 C:\git\private_repos\Model01-Firmware
+arduino-cli.exe compile -b keyboardio:avr:model01 C:\git\private_repos\Model01-Firmware -u -p COM4
 ```
  
 
