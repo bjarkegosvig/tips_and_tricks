@@ -17,6 +17,11 @@ arduino-cli core update-index
 # This line might needs to be run in a admin powershell
 arduino-cli.exe core install arduino:avr keyboardio:avr
 ```
+## Upgrade model01 package
+```ps1
+# This line might needs to be run in a admin powershell
+arduino-cli.exe core upgrade arduino:avr keyboardio:avr
+```
 
 ## Compile the Model01 sketch
  
