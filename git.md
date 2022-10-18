@@ -2,12 +2,13 @@
 [Apply part of a stash](#apply-part-of-a-stash)  
 [Stash single file or folder](#stash-single-file-or-folder)  
 [Find commits to cherry-pick a feature](#find-commits-to-cherry-pick-a-feature)  
-[Check which line ending a file is committed with](#Check-which-line-ending-a-file-is-committed-with)  
-[Get of of stuck branch due to line endings](#Get-of-of-stuck-branch-due-to-line-endings)  
-[Change the date on a commit](#Change-the-date-on-a-commit)  
+[Check which line ending a file is committed with](#check-which-line-ending-a-file-is-committed-with)  
+[Get of of stuck branch due to line endings](#get-of-of-stuck-branch-due-to-line-endings)  
+[Change the date on a commit](#change-the-date-on-a-commit)  
+[Revert changes in a specific file for an old commit](#revert-changes-in-a-specific-file-for-an-old-commit)  
 [Useful alias'](#useful_alias)  
-[Useful git-bash commands](#Useful_git_bash_commands)  
-[Only clone one specific sha](#Only-clone-one-specific-sha)
+[Useful git-bash commands](#useful_git_bash_commands)  
+[Only clone one specific sha](#only-clone-one-specific-sha)
 
 # Apply part of a stash
 

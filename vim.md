@@ -1,3 +1,12 @@
+# Search replace in folder
+1) Open vim and cd to wanted folder
+2) Populate the args list with wanted file types e.g. .py ```:args **/*.py```
+3) Do search replace with :argdo e.g.  
+    ```:argdo %s/\<np.float\>/e | update```  
+    ```\<specific_word\>```  ensure we match the specific_word and don't replace a matching pattern  
+    ``` | update ``` writes only the files where something is changed
+For more info see this stack-overflow post https://vi.stackexchange.com/questions/2776/vim-search-replace-all-files-in-current-project-folder
+
 # CTags
 - Install universal-ctags
 - Generate ctags for only c/c++ by running  
