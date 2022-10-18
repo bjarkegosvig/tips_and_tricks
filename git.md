@@ -92,6 +92,15 @@ GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"
 GIT_COMMITTER_DATE="Mon Sep 5 12:00 2022 +0000" git commit --amend --no-edit
 ```
 
+# Revert changes in a specific file for an old commit
+1) ```git checkout <commit-sha>~1 path/to/your/file``` the ~1 is important. This checks out the previous commit of the file, before the unwanted changes. The commit-sha must be the commit where the unwanted changes was introduced.
+2) ```git restore --staged path/to/your/file```
+3) If you need to change anything in the file do it now. I have used it to revert white space changes while keeping the actual wanted change
+4) ```git add xxx && git commit```
+5) ```git rebase -i HEAD~XXX_back_to_the_commit-sha```
+6) Move the new commit to just before commit-sha and squash the new commit into commit-sha
+7) Finish the rebase
+8) force push to the wanted branch ```git push --force-with-lease```
 
 ## Update any commit to any date date
 1) ```git rebase <commit-hash>^ -i```
