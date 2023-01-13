@@ -1,7 +1,7 @@
 # TOC
 [Apply part of a stash](#apply-part-of-a-stash)  
 [Stash single file or folder](#stash-single-file-or-folder)  
-[Find changed files in last commit](#find-changed-files-in-last-commit)
+[Find changed files in last commit](#find-changed-files-in-last-commit)  
 [Find commits to cherry-pick a feature](#find-commits-to-cherry-pick-a-feature)  
 [Check which line ending a file is committed with](#check-which-line-ending-a-file-is-committed-with)  
 [Get of of stuck branch due to line endings](#get-of-of-stuck-branch-due-to-line-endings)  
