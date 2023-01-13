@@ -1,6 +1,7 @@
 # TOC
 [Apply part of a stash](#apply-part-of-a-stash)  
 [Stash single file or folder](#stash-single-file-or-folder)  
+[Find changed files in last commit](#find-changed-files-in-last-commit)
 [Find commits to cherry-pick a feature](#find-commits-to-cherry-pick-a-feature)  
 [Check which line ending a file is committed with](#check-which-line-ending-a-file-is-committed-with)  
 [Get of of stuck branch due to line endings](#get-of-of-stuck-branch-due-to-line-endings)  
@@ -33,6 +34,10 @@ Source <https://riptutorial.com/git/example/7733/apply-part-of-a-stash-with-chec
 git stash push file_name
 
 git stash push folder_name
+```
+# Find changed files in last commit
+```bash
+git diff --name-only HEAD HEAD~1
 ```
 
 # Find commits to cherry-pick a feature
