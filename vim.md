@@ -30,3 +30,8 @@ This is at least requeired for windows
 - Install FZF, ripgrep and ag
 - If on windows in order to have proper previews install Windows subsystem by running
     - ```wsl.exe --install```
+
+# Telescope-project
+## Add windows project with space in folder path
+- In %localappdata%/nvim-data/telescope-project.txt add a line like this 
+    ```scratch_code=c:\Users\bjkn\Onedrive - Demant\scratch_code=w0=1=1```
