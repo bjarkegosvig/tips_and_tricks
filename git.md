@@ -7,10 +7,10 @@
 [Get of of stuck branch due to line endings](#get-of-of-stuck-branch-due-to-line-endings)  
 [Change the date on a commit](#change-the-date-on-a-commit)  
 [Revert changes in a specific file for an old commit](#revert-changes-in-a-specific-file-for-an-old-commit)  
-[Useful alias'](#useful_alias)  
-[Useful git-bash commands](#useful_git_bash_commands)  
+[Useful alias'](#useful-alias)  
+[Useful git-bash commands](#useful-git-bash-commands)  
 [Only clone one specific sha](#only-clone-one-specific-sha)
-
+[ Change line endings from CRLF to LF recursively](#change-line-endings-from-crlf-to-lf-recursively)
 # Apply part of a stash
 
 You've made a stash and wish to checkout only some of the files/folder in that
@@ -180,3 +180,14 @@ pushd ${env.repoName}
 git checkout ${env.GIT_COMMIT_SHA_RESOLVED}
 popd
 ```
+
+
+## Change line endings from CRLF to LF recursively
+If you are unlucky you get windows line endings in linux code and you want to fix all files in a folder structure. Below is two commands, which find all files and run them through the `dos2unix` utility.
+The commands are equally fast, but one requires that the folder is a git repo. 
+
+```
+fdfind . --type f | xargs -n 50 -P 4 dos2unix --quiet
+git ls-files --recurse-submodules -z | xargs -0 -n 50 -P 4 dos2unix --quiet
+```
+
