@@ -73,3 +73,26 @@ CompileFlags:
   Add: [  -I/home/bjkn/repos/headset_ref/sdk/mcu/tools/gcc9.2.1/linux/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/9.2.1/include,
           -I/home/bjkn/repos/headset_ref/sdk/mcu/tools/gcc9.2.1/linux/gcc-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/9.2.1/include-fixed,
 ```
+
+# Close buffers
+## Close buffers from a certain folder
+Use \<C-a\> to complete all matches.
+type
+```
+:bd path/to/folder/*
+```
+or
+```
+:bd *.filetype
+```
+Then press 
+```
+Ctrl + a
+```
+to compete all matches. Finally press \<Enter\> to close all the matches.
+
+## Close all buffers except current
+```
+:%bd|e#
+```
+
