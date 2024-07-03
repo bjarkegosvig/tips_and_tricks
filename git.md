@@ -9,8 +9,11 @@
 [Revert changes in a specific file for an old commit](#revert-changes-in-a-specific-file-for-an-old-commit)  
 [Useful alias'](#useful-alias)  
 [Useful git-bash commands](#useful-git-bash-commands)  
-[Only clone one specific sha](#only-clone-one-specific-sha)
-[ Change line endings from CRLF to LF recursively](#change-line-endings-from-crlf-to-lf-recursively)
+[Only clone one specific sha](#only-clone-one-specific-sha)  
+[Change line endings from CRLF to LF recursively](#change-line-endings-from-crlf-to-lf-recursively)  
+[Run clang-format on range of commits on a branch](#run-clang-format-on-range-of-commits-on-a-branch)
+
+
 # Apply part of a stash
 
 You've made a stash and wish to checkout only some of the files/folder in that
@@ -173,7 +176,7 @@ alias gco='fzf-git-checkout'
 
 ## Only clone one specific sha
 Useful when a shallow clone is not enough, especially on a build server when cloning takes a long time.
-Uses the fact that a git config can be passed on the fly to git clone command
+Uses the fact that a git configuration can be passed on the fly to git clone command
 ```
 git clone --quiet --config remote.origin.fetch=+${env.GIT_COMMIT_SHA_RESOLVED}:refs/remotes/origin/${env.GIT_COMMIT_SHA_RESOLVED} --config advice.detachedHead=false https://GITREPO.git --no-checkout --depth 1
 pushd ${env.repoName}
@@ -191,3 +194,28 @@ fdfind . --type f | xargs -n 50 -P 4 dos2unix --quiet
 git ls-files --recurse-submodules -z | xargs -0 -n 50 -P 4 dos2unix --quiet
 ```
 
+# Run clang-format on range of commits on a branch
+This script runs finds the first commit on branch and runs clang-format on all commits on the branch.
+This is meant to run in a pipeline and fail if the code needs to be formatted. The user is responsible for manually clang-format on the code and commit it.
+```
+#!/bin/env bash
+
+# @TODO Some times first commit is empty and then the script fails. Investigate why.
+export FIRST_COMMIT=$(git rev-list --ancestry-path origin/master..HEAD | tail -n 1)
+
+# Check clang-format makes any changes
+clangformatout=$(git clang-format --style=file $FIRST_COMMIT^ --extensions c,cpp,h,hpp --diff -q)
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Echo which command to run to format the code according to the specification
+if [ "$clangformatout" != "" ]
+then
+    echo -e "Style check failed. Please reformat your code with"
+    echo -e "git clang-format --style=file $FIRST_COMMIT^ --extensions c,cpp,h,hpp \n"
+    echo -e "The current style diff is:"
+    echo -e $clangformatout
+    exit 1
+fi
+```
